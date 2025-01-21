@@ -6,8 +6,10 @@
   "scripts": {
     "start": "node app.js",
     "build": "echo 'No build step required'",
+    "deploy": "gh-pages -d public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+
   "keywords": ["portfolio", "website", "personal"],
   "author": "Evan Moore",
   "license": "ISC",
