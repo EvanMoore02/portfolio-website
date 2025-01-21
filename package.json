@@ -1,13 +1,15 @@
 {
   "name": "portfolio-website",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A personal portfolio website for showcasing projects and skills.",
+  "main": "app.js",
   "scripts": {
+    "start": "node app.js",
+    "build": "echo 'No build step required'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["portfolio", "website", "personal"],
+  "author": "Evan Moore",
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.10",
