@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
-const app = express(); // This line is necessary to initialize the app
+const ejs = require('ejs');
+const fs = require('fs');
+const app = express();
 const port = 3000;
 
 // Set EJS as the templating engine
@@ -9,13 +11,19 @@ app.set('view engine', 'ejs');
 // Serve static files (CSS, images, etc.)
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Render EJS to static HTML for GitHub Pages (Generate index.html)
+ejs.renderFile(path.join(__dirname, 'views', 'index.ejs'), {}, (err, str) => {
+  if (err) throw err;
+  fs.writeFileSync(path.join(__dirname, 'public', 'index.html'), str); // Save as index.html
+});
+
 // Home route
 app.get('/', (req, res) => {
   res.render('index', {
     title: 'My Portfolio',
     name: 'Evan Moore',
     bio: 'A brief description about you.',
-    resume: { // Make sure this object is here and is defined
+    resume: { 
       name: 'Evan Moore',
       address: '6 Bennington Street, Ottawa, Ontario K2G 5S5',
       cell: '(343) 262-0613',
