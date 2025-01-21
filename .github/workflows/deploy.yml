@@ -1,32 +1,26 @@
-name: Deploy Node.js App
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - main
+      - main  # Replace with your default branch name
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
+    - name: Install dependencies
+      run: npm install
 
-      - name: Install Dependencies
-        run: npm install
+    - name: Build static files
+      run: npm run build  # Replace with your build script if needed
 
-      - name: Build Application
-        run: npm run build
-
-      - name: Deploy to Render
-        env:
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
-        run: |
-          curl -X POST https://api.render.com/deploy \
-            -H "Authorization: Bearer $RENDER_API_KEY"
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public  # Directory to deploy (must contain index.html)
